@@ -11,9 +11,9 @@ pub enum ErrorCode {
     #[msg("asset not staked")]
     AssetNotStaked,
     #[msg("invalid timestamp")]
-    InvaidTimestamp,
+    InvalidTimestamp,
     #[msg("freeze period not elapsed")]
     FreezePeriodNotElapsed,
     #[msg("invalid rewards bps")]
-    INvalidRewardsBps,
+    InvalidRewardsBps,
 }

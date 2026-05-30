@@ -18,7 +18,7 @@ pub struct CreateCollection<'info>{
 
     pub update_authority: UncheckedAccount<'info>,
     pub system_account: Program<'info, System>,
-/// CHECK:
+/// CHECK: 
     #[account(address= MPL_CORE_ID)]
     pub mpl_core_program: UncheckedAccount<'info>,
 }

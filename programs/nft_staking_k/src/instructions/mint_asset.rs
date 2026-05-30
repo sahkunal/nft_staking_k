@@ -19,7 +19,7 @@ pub struct MintAsset<'info>{
         bump,
     )]
 
-    pub update_authority: UncheckedAccount<'info>,
+    pub update_authority: UncheckedAccount<'info>, 
     pub system_program: Program<'info, System>,
 /// CHECK:
     #[account(address= MPL_CORE_ID)]

@@ -2,7 +2,7 @@ use anchor_lang::prelude ::*;
 use mpl_core::{
     ID as MPL_CORE_ID,
     accounts::{BaseAssetV1, BaseCollectionV1},
-    instructions::{AddPluginV1CpiBuilder, UpdatePluginV1Builder},
+    instructions::{AddPluginV1CpiBuilder, UpdatePluginV1CpiBuilder},
     types::{UpdateAuthority, Attribute, Attributes, Plugin, PluginAuthority, PluginType, FreezeDelegate},
     fetch_plugin,
 };
@@ -58,11 +58,78 @@ pub struct Stake<'info>{
         }
         else if attribute.key!="staked_at"{
             attributes_list.push(attribute.clone());
+        }
     }
-}
     }
     //add the staking attributes
-    attributes_list.push(Attribute { key: "staked".to_string(),
-})
-    }
+    attributes_list.push(Attribute { 
+        key: "staked".to_string(),
+        value:"true".to_string(),
+});
+     attributes_list.push(Attribute { 
+        key: "staked".to_string(),
+        value:Clock::get()?.unix_timestamp.to_string(),
+     });
+
+     let collection_key = ctx.accounts.collection.key();
+     let signer_seeds:&[&[&[u8]]]=&[&[
+        b"update_authority",
+        collection_key.as_ref(),
+        &[ctx.bumps.update_authority],
+     ]] ;
+
+    // If the Attributes plugin does not exist, we add it
+if attributes_fetched.is_none() {
+
+    AddPluginV1CpiBuilder::new(
+        &ctx.accounts.mpl_core_program.to_account_info()
+    )
+    .asset(&ctx.accounts.asset.to_account_info())
+    .collection(Some(&ctx.accounts.collection.to_account_info()))
+    .payer(&ctx.accounts.owner.to_account_info())
+    .authority(Some(&ctx.accounts.update_authority.to_account_info()))
+    .system_program(&ctx.accounts.system_program.to_account_info())
+    .plugin(Plugin::Attributes( Attributes {
+            attribute_list: attributes_list
+        }
+    ))
+    .init_authority(PluginAuthority::UpdateAuthority)
+    .invoke_signed(signer_seeds)?;
+}
+
+// If the Attributes plugin exists, we update it
+else {
+
+    UpdatePluginV1CpiBuilder::new(
+        &ctx.accounts.mpl_core_program.to_account_info()
+    )
+    .asset(&ctx.accounts.asset.to_account_info())
+    .collection(Some(&ctx.accounts.collection.to_account_info()))
+    .payer(&ctx.accounts.owner.to_account_info())
+    .authority(Some(&ctx.accounts.update_authority.to_account_info()))
+    .system_program(&ctx.accounts.system_program.to_account_info())
+    .plugin(Plugin::Attributes(
+        Attributes {
+            attribute_list: attributes_list
+        }
+    ))
+    .invoke_signed(signer_seeds)?;
+
+}
+
+
+AddPluginV1CpiBuilder::new(
+        &ctx.accounts.mpl_core_program.to_account_info()
+    )
+    .asset(&ctx.accounts.asset.to_account_info())
+    .collection(Some(&ctx.accounts.collection.to_account_info()))
+    .payer(&ctx.accounts.owner.to_account_info())
+    .authority(Some(&ctx.accounts.update_authority.to_account_info()))
+    .system_program(&ctx.accounts.system_program.to_account_info())
+    .plugin(Plugin::FreezeDelegate(FreezeDelegate{frozen: true}))
+    .init_authority(PluginAuthority::UpdateAuthority)
+    .invoke()?;
+    
+    Ok(())
+}
 

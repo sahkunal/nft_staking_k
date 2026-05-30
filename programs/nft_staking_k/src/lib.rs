@@ -28,7 +28,7 @@ pub mod nft_staking_k {
    pub fn stake(ctx: Context<Stake>)-> Result<()>{
        stake::handler(ctx)
     }
-//      pub fn unstake(ctx: Context<unstake>)-> Result<()>{
-//        unstake::handler(ctx)
-// }
+     pub fn unstake(ctx: Context<Unstake>)-> Result<()>{
+       unstake::handler(ctx)
+}
 }
