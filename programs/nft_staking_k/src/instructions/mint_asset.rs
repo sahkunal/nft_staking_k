@@ -37,7 +37,7 @@ pub fn handler(ctx: Context<MintAsset>, name: String, uri: String)-> Result<()>{
     CreateV2CpiBuilder::new(&ctx.accounts.mpl_core_program.to_account_info())
     .asset(&ctx.accounts.asset.to_account_info())
     .collection(Some(&ctx.accounts.collection.to_account_info()))
-    .authority(Some(&ctx.accounts.collection.to_account_info()))
+    .authority(Some(&ctx.accounts.update_authority.to_account_info()))
     .payer(&ctx.accounts.user.to_account_info())
     .owner(Some(&ctx.accounts.user.to_account_info()))
     .update_authority(None)

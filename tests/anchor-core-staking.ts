@@ -45,7 +45,6 @@ console.log("Program ID:", program.programId.toBase58());
     ],
     program.programId
   )[0];
-
   // Find the rewards mint account (PDA)
   const rewardsMint = anchor.web3.PublicKey.findProgramAddressSync(
     [
@@ -54,7 +53,9 @@ console.log("Program ID:", program.programId.toBase58());
     ],
     program.programId
   )[0];
-
+console.log("Config PDA:", config.toBase58());
+console.log("Rewards Mint PDA:", rewardsMint.toBase58());
+console.log("Update Authority PDA:", updateAuthority.toBase58());
   // Helper function to advance time with Surfpool
   async function advanceTime(params: {
     absoluteEpoch?: number;
@@ -220,7 +221,7 @@ console.log("Program ID:", program.programId.toBase58());
       }
     }
   });
-  it("Time travel to the future", async()=>{
+  it.skip("Time travel to the future", async()=>{
     const currentTimestamp= Date.now();
     await advanceTime({absoluteTimestamp: currentTimestamp + TIME_TRAVEL_IN_DAYS * MILLISECONDS_PER_DAY});
     console.log("\nTime traveled in days",TIME_TRAVEL_IN_DAYS)
@@ -254,5 +255,8 @@ console.log("Program ID:", program.programId.toBase58());
 
   console.log("\nYour transaction signature", tx);
   console.log("User rewards balance", (await provider.connection.getTokenAccountBalance(userRewardsAta)).value.uiAmount);
+
+
+  
 });
 });

@@ -1,0 +1,15 @@
+################################################################
+# Manage nft_staking_k deployment through Crypto Infrastructure as Code
+################################################################
+
+addon "svm" {
+    rpc_api_url = input.rpc_api_url
+    network_id = input.network_id
+}
+
+action "deploy_nft_staking_k" "svm::deploy_program" {
+    description = "Deploy nft_staking_k program"
+    program = svm::get_program_from_anchor_project("nft_staking_k") 
+    authority = signer.authority
+    payer = signer.payer
+}

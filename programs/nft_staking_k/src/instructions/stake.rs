@@ -63,7 +63,7 @@ pub struct Stake<'info>{
     }
     //add the staking attributes
     attributes_list.push(Attribute { 
-        key: "staked".to_string(),
+        key: "staked_at".to_string(),
         value:"true".to_string(),
 });
      attributes_list.push(Attribute { 
@@ -128,7 +128,7 @@ AddPluginV1CpiBuilder::new(
     .system_program(&ctx.accounts.system_program.to_account_info())
     .plugin(Plugin::FreezeDelegate(FreezeDelegate{frozen: true}))
     .init_authority(PluginAuthority::UpdateAuthority)
-    .invoke()?;
+    .invoke_signed(signer_seeds)?;
     
     Ok(())
 }

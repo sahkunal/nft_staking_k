@@ -1,0 +1,85 @@
+
+Found a 'test' script in the Anchor.toml. Running it as a test suite!
+
+Running test suite: "/home/tyler/nft_staking_k/Anchor.toml"
+
+yarn run v1.22.22
+warning ../package.json: No license field
+$ /home/tyler/nft_staking_k/node_modules/.bin/ts-mocha -p ./tsconfig.json -t 1000000 'tests/**/*.ts'
+Program ID: 3JwmfbxuaZnTzkYiFnpJYyfTfi9LCmMXdASyvyhJaUnc
+Config PDA: A1v9xvnVrutfdeB5JTcG1D4HDp46LnJkxZDQe5m5Kvw1
+Rewards Mint PDA: 2GVg5LNY1exEh58kiZeM2ELUM5RdJwvzXzfPhCXLzPkG
+Update Authority PDA: 3A45JL2ihMXQ9JeunYRsxsfVX9RTL5ihsLv1rAbd3aYv
+(node:194585) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/tyler/nft_staking_k/tests/anchor-core-staking.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/tyler/nft_staking_k/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:194585) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+
+
+  anchor-core-staking
+
+Your transaction signature 2novmnkUxp8kDyG8dKiQSwFQ1kMGe8raH52og82NMs65JyV4JyHjqKb3Sroe1NLoa2iCKGHDm3wJtPdcxFrn3T3p
+Collection address FR8sd9PVQs4hRPMq3me9TjeGMtRmrrLYivB1VznkPYHd
+    ✔ Create a collection (401ms)
+
+Your transaction signature 3th2XGudEyZqaeBxRiVxS4WkVNimgbjCZvS435TL24e573Tx2CGqGxx7t2g3TztcGCizn28EugsTQqdYZ9vpVzez
+NFT address 3ztAmQQmqkK3ceidVMuUUJsTu6KeJQkREFQjVUZAWtKg
+    ✔ Mint an NFT (419ms)
+
+Your transaction signature 3RCJa83DGHdwvqNuujNuQJinAgnRhKeqKJbQGaza6xw9DXykUPLJj2ZeCQheterHqS1UyFiRvjUMNyTzXsDQzxgR
+Config address A1v9xvnVrutfdeB5JTcG1D4HDp46LnJkxZDQe5m5Kvw1
+Rewards BPS 10000
+Freeze period in days 7
+Rewards mint address 2GVg5LNY1exEh58kiZeM2ELUM5RdJwvzXzfPhCXLzPkG
+    ✔ Initialize Config (419ms)
+    1) Stake an NFT
+    2) Try to unstake an NFT before the freeze period ends
+    - Time travel to the future
+    3) Unstake an NFT
+
+
+  3 passing (1s)
+  1 pending
+  3 failing
+
+  1) anchor-core-staking
+       Stake an NFT:
+     Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 0: Cross-program invocation with unauthorized signer or writable account. 
+Logs: 
+[
+  "Program log: programs/mpl-core/src/state/collection.rs:160:Approve",
+  "Program 11111111111111111111111111111111 invoke [3]",
+  "Program 11111111111111111111111111111111 success",
+  "Program 11111111111111111111111111111111 invoke [3]",
+  "Program 11111111111111111111111111111111 success",
+  "Program CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d consumed 15298 of 181305 compute units",
+  "Program CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d success",
+  "3A45JL2ihMXQ9JeunYRsxsfVX9RTL5ihsLv1rAbd3aYv's signer privilege escalated",
+  "Program 3JwmfbxuaZnTzkYiFnpJYyfTfi9LCmMXdASyvyhJaUnc consumed 37096 of 200000 compute units",
+  "Program 3JwmfbxuaZnTzkYiFnpJYyfTfi9LCmMXdASyvyhJaUnc failed: Cross-program invocation with unauthorized signer or writable account"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+  
+
+  2) anchor-core-staking
+       Try to unstake an NFT before the freeze period ends:
+     Error: AnchorError caused by account: rewards_mint. Error Code: ConstraintSeeds. Error Number: 2006. Error Message: A seeds constraint was violated.
+      at AnchorError.parse (node_modules/@coral-xyz/anchor/src/error.ts:168:14)
+      at translateError (node_modules/@coral-xyz/anchor/src/error.ts:277:35)
+      at MethodsBuilder.rpc [as _rpcFn] (node_modules/@coral-xyz/anchor/src/program/namespace/rpc.ts:35:29)
+      at processTicksAndRejections (node:internal/process/task_queues:104:5)
+
+  3) anchor-core-staking
+       Unstake an NFT:
+     Error: AnchorError caused by account: rewards_mint. Error Code: ConstraintSeeds. Error Number: 2006. Error Message: A seeds constraint was violated.
+      at AnchorError.parse (node_modules/@coral-xyz/anchor/src/error.ts:168:14)
+      at translateError (node_modules/@coral-xyz/anchor/src/error.ts:277:35)
+      at MethodsBuilder.rpc [as _rpcFn] (node_modules/@coral-xyz/anchor/src/program/namespace/rpc.ts:35:29)
+      at processTicksAndRejections (node:internal/process/task_queues:104:5)
+
+
+
+error Command failed with exit code 3.
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
