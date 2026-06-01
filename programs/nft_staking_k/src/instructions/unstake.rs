@@ -74,7 +74,7 @@ pub fn handler(ctx: Context<Unstake>)-> Result<()>{
     let mut attributes_list: Vec<Attribute>= Vec::with_capacity(attributes.attribute_list.len());
 
     let current_timestamp= Clock::get()?.unix_timestamp;
-    let mut staked_timestamp:i64=0;
+    let mut staked_timestamp=0;
     let mut staked_time:i64 =0;
     for attribute in attributes.attribute_list{
         if attribute.key== "staked"{

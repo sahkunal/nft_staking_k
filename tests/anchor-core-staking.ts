@@ -19,8 +19,8 @@ describe("anchor-core-staking", () => {
   const provider = anchor.AnchorProvider.env();
   anchor.setProvider(provider);
 
-  const program =
-    anchor.workspace.nftStakingK as Program<NftStakingK>;
+const program = anchor.workspace.nftStakingK as Program<NftStakingK>;
+console.log("Program ID:", program.programId.toBase58());
 
   // Generate a keypair for the collection
   const collectionKeypair = anchor.web3.Keypair.generate();

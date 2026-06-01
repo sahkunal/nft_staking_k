@@ -10,7 +10,7 @@ pub use constants::*;
 pub use instructions::*;
 pub use state::*;
 
-declare_id!("4gkXvCPc8GsE3bcXMJcq24Kp2vbyCwHgzxjEjBPHUG8y");
+declare_id!("DJqtV3vtUeu2TFsu2A7h7hVoa43mrZ9xDgu9YzgV5GLu");
 
 #[program]
 pub mod nft_staking_k {
